@@ -7,7 +7,7 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
   buildKey: () => "floating-search-input",
   defaultState() {
     return {
-      expanded: false
+      expanded: false,
     };
   },
   html(attrs) {
@@ -60,6 +60,11 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     return !this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
+  },
+  linkClickedEvent() {
+    const input = document.getElementById("search-term");
+    input.value = "";
+    this.sendWidgetAction("toggleSearchBanner")
   },
   toggleSearchBanner() {
     this.state.expanded = !this.state.expanded;
