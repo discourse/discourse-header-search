@@ -1,5 +1,8 @@
 import { createWidgetFrom } from "discourse/widgets/widget";
-import { default as searchMenu } from "discourse/widgets/search-menu";
+import {
+  default as searchMenu,
+  DEFAULT_TYPE_FILTER,
+} from "discourse/widgets/search-menu";
 import { h } from "virtual-dom";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
@@ -13,12 +16,16 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
   html(attrs) {
     // if (!attrs.shouldRender) return;
     // SearchData is passed down from the search-menu widget
-    const searchData = this.searchData;
-    const term = searchData.term;
-    const results = searchData.results;
-    const isLoading = searchData.loading;
-    const searchContextEnabled = searchData.contextEnabled;
-    const showResults = this.state.expanded && term && !isLoading;
+    const {
+      term,
+      results,
+      loading,
+      noResults,
+      invalidTerm,
+      suggestionKeyword,
+      suggestionResults,
+    } = this.searchData;
+    const showResults = this.state.expanded;
     return [
       h(
         "div.search-banner",
@@ -28,27 +35,27 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
               this.attach("button", {
                 className: "btn btn-primary search-button",
                 icon: "search",
-                action: term ? "fullSearch" : ""
+                action: term ? "fullSearch" : "",
               }),
-              isLoading ? h("div.searching", h("div.spinner")) : "",
+              loading ? h("div.searching", h("div.spinner")) : "",
               this.attach("search-term", {
-                value: term || "",
-                searchContextEnabled,
-                placeholder: "Search Forum"
+                value: term,
               }),
             ]),
             showResults
               ? this.attach("search-menu-results", {
-                  term: term,
-                  noResults: searchData.noResults,
-                  results: results,
-                  invalidTerm: searchData.invalidTerm,
-                  searchContextEnabled: searchContextEnabled
+                  term,
+                  noResults,
+                  results,
+                  invalidTerm,
+                  suggestionKeyword,
+                  suggestionResults,
+                  searchTopics: this.searchesTopics(),
                 })
-              : ""
-          ])
+              : "",
+          ]),
         ])
-      )
+      ),
     ];
   },
   clickOutside() {
@@ -64,9 +71,13 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
   linkClickedEvent() {
     const input = document.getElementById("search-term");
     input.value = "";
-    this.sendWidgetAction("toggleSearchBanner")
+    this.sendWidgetAction("toggleSearchBanner");
   },
   toggleSearchBanner() {
     this.state.expanded = !this.state.expanded;
-  }
+  },
+
+  searchesTopics() {
+    return this.searchData.typeFilter !== DEFAULT_TYPE_FILTER;
+  },
 });
