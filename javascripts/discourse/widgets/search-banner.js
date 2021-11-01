@@ -58,7 +58,7 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       ),
     ];
   },
-  clickOutside() {
+  mouseDownOutside() {
     return this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
