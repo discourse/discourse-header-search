@@ -5,7 +5,7 @@ export default {
   name: "customize-widget",
 
   initialize() {
-    withPluginApi("0.8.14", api => {
+    withPluginApi("0.8.14", (api) => {
       api.reopenWidget("header-contents", {
         template: hbs`
         {{home-logo attrs=attrs}}
@@ -16,7 +16,14 @@ export default {
         {{/if}}
         <div class="panel clearfix">{{yield}}</div>
       `,
-      })
+      });
+
+      api.reopenWidget("header", {
+        toggleSearchMenu() {
+          // Disable core search menu panel toggling on Esc hit
+          return false;
+        },
+      });
     });
-  }
-}
+  },
+};
