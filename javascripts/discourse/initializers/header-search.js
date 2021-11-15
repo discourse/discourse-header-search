@@ -18,12 +18,12 @@ export default {
       `,
       });
 
-      api.reopenWidget("header", {
-        toggleSearchMenu() {
-          // Disable core search menu panel toggling on Esc hit
-          return false;
-        },
-      });
+      // api.reopenWidget("header", {
+      //   toggleSearchMenu() {
+      //     // Disable core search menu panel toggling on Esc hit
+      //     return false;
+      //   },
+      // });
     });
   },
 };

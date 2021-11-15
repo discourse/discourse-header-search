@@ -1,9 +1,10 @@
-.header-dropdown-toggle.search-dropdown {
+.floating-search-input + .panel .header-dropdown-toggle.search-dropdown {
   display: none;
 }
 
 a.widget-link.search-link {
   padding: 0;
+  color: var(--primary);
 }
 
 .floating-search-input + .panel {
