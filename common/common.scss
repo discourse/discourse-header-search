@@ -1,4 +1,5 @@
-.floating-search-input + .panel .header-dropdown-toggle.search-dropdown {
+.floating-search-input + .panel .header-dropdown-toggle.search-dropdown,
+.floating-search-input + .panel .search-menu {
   display: none;
 }
 
