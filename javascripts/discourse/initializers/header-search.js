@@ -17,13 +17,6 @@ export default {
         <div class="panel clearfix">{{yield}}</div>
       `,
       });
-
-      api.reopenWidget("header", {
-        toggleSearchMenu() {
-          // Disable core search menu panel toggling on Esc hit
-          return false;
-        },
-      });
     });
   },
 };
