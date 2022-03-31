@@ -4,6 +4,7 @@ import {
   DEFAULT_TYPE_FILTER,
 } from "discourse/widgets/search-menu";
 import { h } from "virtual-dom";
+import { logSearchLinkClick } from "discourse/lib/search";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
   tagName: "div.floating-search-input",
@@ -68,7 +69,16 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
   },
-  linkClickedEvent() {
+  linkClickedEvent(attrs) {
+    const { searchLogId, searchResultId, searchResultType } = attrs;
+    if (searchLogId && searchResultId && searchResultType) {
+      logSearchLinkClick({
+        searchLogId,
+        searchResultId,
+        searchResultType,
+      });
+    }
+
     const input = document.getElementById("search-term");
     input.value = "";
     this.sendWidgetAction("toggleSearchBanner");
