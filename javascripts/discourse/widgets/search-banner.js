@@ -1,7 +1,7 @@
 import { createWidgetFrom } from "discourse/widgets/widget";
 import {
-  default as searchMenu,
   DEFAULT_TYPE_FILTER,
+  default as searchMenu,
 } from "discourse/widgets/search-menu";
 import { h } from "virtual-dom";
 import { logSearchLinkClick } from "discourse/lib/search";
@@ -9,13 +9,14 @@ import { logSearchLinkClick } from "discourse/lib/search";
 export default createWidgetFrom(searchMenu, "floating-search-input", {
   tagName: "div.floating-search-input",
   buildKey: () => "floating-search-input",
+
   defaultState() {
     return {
       expanded: false,
     };
   },
-  html(attrs) {
-    // if (!attrs.shouldRender) return;
+
+  html() {
     // SearchData is passed down from the search-menu widget
     const {
       term,
@@ -27,6 +28,7 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       suggestionResults,
     } = this.searchData;
     const showResults = this.state.expanded;
+
     return [
       h(
         "div.search-banner",
@@ -59,16 +61,19 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       ),
     ];
   },
+
   mouseDownOutside() {
     return this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
   },
+
   click() {
     return !this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
   },
+
   linkClickedEvent(attrs) {
     const { searchLogId, searchResultId, searchResultType } = attrs;
     if (searchLogId && searchResultId && searchResultType) {
@@ -83,6 +88,7 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     input.value = "";
     this.sendWidgetAction("toggleSearchBanner");
   },
+
   toggleSearchBanner() {
     this.state.expanded = !this.state.expanded;
   },
