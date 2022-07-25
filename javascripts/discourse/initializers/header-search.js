@@ -12,7 +12,9 @@ export default {
         {{#if attrs.topic}}
           {{header-topic-info attrs=attrs}}
         {{else}}
-          {{floating-search-input attrs=attrs}}
+          {{#unless this.site.mobileView}}
+            {{floating-search-input attrs=attrs}}
+          {{/unless}}
         {{/if}}
         <div class="panel clearfix">{{yield}}</div>
       `,
