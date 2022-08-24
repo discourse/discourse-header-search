@@ -34,18 +34,13 @@ a.widget-link.search-link {
         position: relative;
         .widget-button.btn {
           background: transparent;
-          padding: 0;
+          padding: 0.25em;
           position: absolute;
-          top: 0.6em;
-          left: 0.6em;
+          top: 0.25em;
+          left: 0.25em;
+          pointer-events: none;
           .d-icon {
-            color: var(--primary-medium);
-          }
-          &:hover {
-            background: var(--primary-medium);
-            .d-icon {
-              color: var(--secondary);
-            }
+            color: var(--header_primary-medium);
           }
         }
         .searching {
@@ -53,6 +48,7 @@ a.widget-link.search-link {
           right: 1.65em;
         }
         .search-input {
+          box-sizing: border-box;
           height: 60%;
           width: 100%;
           display: flex;
@@ -63,6 +59,8 @@ a.widget-link.search-link {
             margin: 0;
             padding: 0.5em 0.5em 0.5em 2em;
             border-radius: 0.25em;
+            background: var(--header_background);
+            color: var(--header_primary);
             &:focus {
               outline: none;
               box-shadow: 0px 0px 0px 2px rgba(var(--tertiary-rgb), 0.25);
