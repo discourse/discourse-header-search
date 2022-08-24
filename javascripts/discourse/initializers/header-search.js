@@ -11,10 +11,14 @@ export default {
         {{home-logo attrs=attrs}}
         {{#if attrs.topic}}
           {{header-topic-info attrs=attrs}}
-        {{else}}
-          {{#unless this.site.mobileView}}
+        {{else}}     
+          {{#if this.site.siteSettings.login_required}}
+            {{#if this.currentUser}}
+              {{floating-search-input attrs=attrs}}
+            {{/if}}
+          {{else}}
             {{floating-search-input attrs=attrs}}
-          {{/unless}}
+          {{/if}}   
         {{/if}}
         <div class="panel clearfix">{{yield}}</div>
       `,
