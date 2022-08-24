@@ -11,7 +11,7 @@ export default {
         {{home-logo attrs=attrs}}
         {{#if attrs.topic}}
           {{header-topic-info attrs=attrs}}
-        {{else}}     
+        {{else}}
           {{#unless this.site.mobileView}}
             {{#if this.site.siteSettings.login_required}}
               {{#if this.currentUser}}
