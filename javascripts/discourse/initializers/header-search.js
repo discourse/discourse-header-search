@@ -12,13 +12,15 @@ export default {
         {{#if attrs.topic}}
           {{header-topic-info attrs=attrs}}
         {{else}}     
-          {{#if this.site.siteSettings.login_required}}
-            {{#if this.currentUser}}
+          {{#unless this.site.mobileView}}
+            {{#if this.site.siteSettings.login_required}}
+              {{#if this.currentUser}}
+                {{floating-search-input attrs=attrs}}
+              {{/if}}
+            {{else}}
               {{floating-search-input attrs=attrs}}
-            {{/if}}
-          {{else}}
-            {{floating-search-input attrs=attrs}}
-          {{/if}}   
+            {{/if}}   
+          {{/unless}}
         {{/if}}
         <div class="panel clearfix">{{yield}}</div>
       `,
