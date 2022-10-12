@@ -8,6 +8,13 @@ export default {
     withPluginApi("0.8.14", (api) => {
       api.reopenWidget("header-contents", {
         template: hbs`
+        {{#if this.site.desktopView}}
+          {{#if this.siteSettings.enable_experimental_sidebar_hamburger}}
+            {{#if attrs.sidebarEnabled}}
+              {{sidebar-toggle attrs=attrs}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
         {{home-logo attrs=attrs}}
         {{#if attrs.topic}}
           {{header-topic-info attrs=attrs}}
