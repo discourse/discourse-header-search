@@ -4,6 +4,7 @@ import {
   default as searchMenu,
 } from "discourse/widgets/search-menu";
 import { h } from "virtual-dom";
+import { iconNode } from "discourse-common/lib/icon-library";
 import { logSearchLinkClick } from "discourse/lib/search";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
@@ -26,8 +27,23 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       invalidTerm,
       suggestionKeyword,
       suggestionResults,
+      fullSearchUrl,
     } = this.searchData;
     const showResults = this.state.expanded;
+
+    const clearButton = this.attach("link", {
+      title: "search.clear_search",
+      action: "clearSearch",
+      className: "clear-search",
+      contents: () => iconNode("times"),
+    });
+
+    const advancedSearchButton = this.attach("link", {
+      href: this.fullSearchUrl({ expanded: true }),
+      contents: () => iconNode("sliders-h"),
+      className: "show-advanced-search",
+      title: "search.open_advanced",
+    });
 
     return [
       h(
@@ -44,6 +60,9 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
               this.attach("search-term", {
                 value: term,
               }),
+              term
+                ? h("div.searching", [clearButton, advancedSearchButton])
+                : h("div.searching", advancedSearchButton),
             ]),
             showResults
               ? this.attach("search-menu-results", {
