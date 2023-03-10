@@ -27,7 +27,6 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       invalidTerm,
       suggestionKeyword,
       suggestionResults,
-      fullSearchUrl,
     } = this.searchData;
     const showResults = this.state.expanded;
 
