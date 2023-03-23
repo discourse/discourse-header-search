@@ -6,6 +6,8 @@ import {
 import { h } from "virtual-dom";
 import { iconNode } from "discourse-common/lib/icon-library";
 import { logSearchLinkClick } from "discourse/lib/search";
+import RenderGlimmer from "discourse/widgets/render-glimmer";
+import { hbs } from "ember-cli-htmlbars";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
   tagName: "div.floating-search-input",
@@ -30,12 +32,20 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     } = this.searchData;
     const showResults = this.state.expanded;
 
-    const clearButton = this.attach("link", {
+    let extraIcons = this.attach("link", {
       title: "search.clear_search",
       action: "clearSearch",
       className: "clear-search",
       contents: () => iconNode("times"),
     });
+
+    if (JSON.parse(settings.extra_search_icons).length > 0) {
+      extraIcons = new RenderGlimmer(
+        this,
+        "span.extra-search-icons",
+        hbs`<SearchBarIcons />`
+      );
+    }
 
     const advancedSearchButton = this.attach("link", {
       href: this.fullSearchUrl({ expanded: true }),
@@ -60,7 +70,7 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
                 value: term,
               }),
               term
-                ? h("div.searching", [clearButton, advancedSearchButton])
+                ? h("div.searching", [extraIcons, advancedSearchButton])
                 : h("div.searching", advancedSearchButton),
             ]),
             showResults

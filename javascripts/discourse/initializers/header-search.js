@@ -24,7 +24,7 @@ export default {
               {{/if}}
             {{else}}
               {{floating-search-input attrs=attrs}}
-            {{/if}}   
+            {{/if}}
           {{/unless}}
         {{/if}}
         <div class="panel clearfix">{{yield}}</div>

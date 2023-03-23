@@ -1,0 +1,36 @@
+extra_search_icons:
+  description: "Add extra icons to the search bar (for example to trigger an external search)."
+  default: >-
+    []
+  json_schema: >-
+    {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "params": {
+            "type": "array",
+            "format": "table",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+svg_icons:
+  default: ""
+  type: "list"
+  list_type: "compact"
