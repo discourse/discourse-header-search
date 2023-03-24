@@ -1,4 +1,8 @@
-import { acceptance, visible } from "discourse/tests/helpers/qunit-helpers";
+import {
+  acceptance,
+  query,
+  visible,
+} from "discourse/tests/helpers/qunit-helpers";
 import { click, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 
@@ -64,8 +68,18 @@ acceptance("Header Search - Extra Icons", function (needs) {
     );
 
     assert.ok(
-      visible(".floating-search-input .extra-search-icons .d-icon-fab-google"),
+      visible(
+        ".floating-search-input .extra-search-icons .search-extra-icon-google"
+      ),
       "it has the google search icon (as defined in theme settings)"
+    );
+
+    assert.strictEqual(
+      query(
+        ".floating-search-input .extra-search-icons .search-extra-icon-google"
+      ).href,
+      "https://www.google.com/search?q=test",
+      "it appends current search term to external link"
     );
 
     assert.ok(
