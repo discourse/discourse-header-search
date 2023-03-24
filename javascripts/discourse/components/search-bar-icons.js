@@ -3,8 +3,8 @@ import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
 
 export default class SearchBarIcons extends Component {
-  @tracked items = [];
   @service router;
+  @tracked items = [];
 
   constructor() {
     super(...arguments);

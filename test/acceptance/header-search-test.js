@@ -1,8 +1,8 @@
 import { acceptance, visible } from "discourse/tests/helpers/qunit-helpers";
-import { fillIn, visit } from "@ember/test-helpers";
+import { click, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 
-acceptance("Header Search", function (needs) {
+acceptance("Header Search", function () {
   test("shows in header", async function (assert) {
     await visit("/");
 
