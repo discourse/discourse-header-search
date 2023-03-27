@@ -1,5 +1,5 @@
 extra_search_icons:
-  description: "Add extra icons to the search bar (for example to trigger an external search)."
+  description: "Add extra icons to the search bar (for example to trigger an external search). See repository README for available params."
   default: >-
     []
   json_schema: >-
