@@ -91,3 +91,14 @@ a.widget-link.search-link {
     }
   }
 }
+
+// Styling for extra icons
+.search-bar-icons--icon {
+  .d-icon {
+    color: var(--primary-low-mid);
+  }
+
+  &:hover .d-icon {
+    color: var(--primary-high);
+  }
+}
