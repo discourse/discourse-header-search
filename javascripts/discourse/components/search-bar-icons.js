@@ -13,11 +13,7 @@ export default class SearchBarIcons extends Component {
     const currentRoute = this.router.currentRoute;
     const categoryId = currentRoute.attributes?.category?.id;
 
-    const searchKeyword = document.querySelector(
-      ".floating-search-input #search-term"
-    ).value;
-
-    if (searchKeyword !== "") {
+    if (this.args.term !== "") {
       JSON.parse(settings.extra_search_icons).forEach((item) => {
         if (item.params) {
           item.params.forEach((p) => {
@@ -25,7 +21,7 @@ export default class SearchBarIcons extends Component {
           });
 
           if (item.prefix) {
-            item.url = `${item.prefix}${searchKeyword}`;
+            item.url = `${item.prefix}${this.args.term}`;
           }
 
           delete item.params;
