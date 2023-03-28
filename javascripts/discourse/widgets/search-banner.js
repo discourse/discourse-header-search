@@ -43,8 +43,15 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       extraIcons = new RenderGlimmer(
         this,
         "span.extra-search-icons",
-        hbs`<SearchBarIcons />`
+        hbs`<SearchBarIcons @term={{@data.term}}/>`,
+        { term }
       );
+
+      // a bit of a hammer, but this ensures
+      // icons are updated when switching routes
+      this.appEvents.on("page:changed", () => {
+        this.scheduleRerender();
+      });
     }
 
     const advancedSearchButton = this.attach("link", {
