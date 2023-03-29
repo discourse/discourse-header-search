@@ -54,12 +54,14 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       });
     }
 
-    const advancedSearchButton = this.attach("link", {
-      href: this.fullSearchUrl({ expanded: true }),
-      contents: () => iconNode("sliders-h"),
-      className: "show-advanced-search",
-      title: "search.open_advanced",
-    });
+    const advancedSearchButton = loading
+      ? h("div.spinner-holder", h("div.spinner"))
+      : this.attach("link", {
+          href: this.fullSearchUrl({ expanded: true }),
+          contents: () => iconNode("sliders-h"),
+          className: "show-advanced-search",
+          title: "search.open_advanced",
+        });
 
     return [
       h(
@@ -72,7 +74,6 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
                 icon: "search",
                 action: term ? "fullSearch" : "",
               }),
-              loading ? h("div.searching", h("div.spinner")) : "",
               this.attach("search-term", {
                 value: term,
               }),

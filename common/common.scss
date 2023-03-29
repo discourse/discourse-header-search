@@ -32,6 +32,13 @@ a.widget-link.search-link {
         }
         margin: 0 auto;
         position: relative;
+
+        .searching .spinner-holder {
+          display: inline-block;
+          vertical-align: top;
+          margin-left: 4px;
+        }
+
         .widget-button.btn {
           background: transparent;
           padding: 0.25em;
