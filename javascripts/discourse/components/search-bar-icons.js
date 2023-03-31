@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
+import { getOwner } from "discourse-common/lib/get-owner";
 
 export default class SearchBarIcons extends Component {
   @service router;
@@ -11,7 +12,13 @@ export default class SearchBarIcons extends Component {
 
     const itemsArray = [];
     const currentRoute = this.router.currentRoute;
-    const categoryId = currentRoute.attributes?.category?.id;
+    let categoryId = currentRoute.attributes?.category?.id;
+
+    // in not in a category route, see if topic has same category id
+    if (!categoryId && currentRoute.name.startsWith("topic.")) {
+      const topic = getOwner(this).lookup("controller:topic");
+      categoryId = topic?.model?.category_id;
+    }
 
     if (this.args.term !== "") {
       JSON.parse(settings.extra_search_icons).forEach((item) => {
