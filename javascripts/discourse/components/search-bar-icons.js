@@ -34,14 +34,26 @@ export default class SearchBarIcons extends Component {
           delete item.params;
         }
 
-        const categoriesToShowOn = item.showInCategories
-          ?.split(",")
-          .map(Number);
-        if (
-          categoriesToShowOn === undefined ||
-          categoriesToShowOn.includes(categoryId)
-        ) {
-          itemsArray.push(item);
+        const showInCategories = item.showInCategories
+          ? item.showInCategories.split(",").map(Number)
+          : [];
+        const excludeFromCategories = item.excludeFromCategories
+          ? item.excludeFromCategories.split(",").map(Number)
+          : [];
+
+        switch (true) {
+          case excludeFromCategories.includes(categoryId):
+            // icon is explicitly excluded for this category id
+            break;
+
+          default:
+            if (
+              showInCategories.length === 0 ||
+              showInCategories.includes(categoryId)
+            ) {
+              itemsArray.push(item);
+            }
+            break;
         }
       });
 
