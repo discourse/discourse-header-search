@@ -14,7 +14,7 @@ export default class SearchBarIcons extends Component {
     const currentRoute = this.router.currentRoute;
     let categoryId = currentRoute.attributes?.category?.id;
 
-    // in not in a category route, see if topic has same category id
+    // when not in a category route, see if topic has same category id
     if (!categoryId && currentRoute.name.startsWith("topic.")) {
       const topic = getOwner(this).lookup("controller:topic");
       categoryId = topic?.model?.category_id;
@@ -43,10 +43,13 @@ export default class SearchBarIcons extends Component {
 
         switch (true) {
           case excludeFromCategories.includes(categoryId):
-            // icon is explicitly excluded for this category id
+            // skip if explicitly excluded for this category ID
             break;
 
           default:
+            // when not excluded, show icon if:
+            // - `showInCategories` param isn't used OR
+            // - category ID included in `showInCategories`
             if (
               showInCategories.length === 0 ||
               showInCategories.includes(categoryId)
