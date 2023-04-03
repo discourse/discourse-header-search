@@ -13,4 +13,5 @@ This setting supports the following params:
 - `prefix`: the prefix to the search URL when clicking the respective icon
 - `icon`: icon to show, from the Font Awesome set (may need to be added to the `svg icons` setting as well)
 - `target`: optionally set to "\_blank" to open the link in its own tab/window by default
-- `showInCategories`: a list of category IDs on which to show this specific icon (if not present, icon is shown everywhere)
+- `showInCategories`: category IDs where the given icon should be shown exclusively (by default, icon is shown everywhere)
+- `excludeFromCategories`: category IDs where the given icon should not be shown
