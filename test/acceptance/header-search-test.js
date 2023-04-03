@@ -42,6 +42,40 @@ acceptance("Header Search - Extra Icons", function (needs) {
         },
       ],
     },
+    {
+      name: "apple",
+      params: [
+        {
+          name: "icon",
+          value: "fab-apple",
+        },
+        {
+          name: "prefix",
+          value: "https://www.apple.com/search?q=",
+        },
+        {
+          name: "showInCategories",
+          value: "7",
+        },
+      ],
+    },
+    {
+      name: "github",
+      params: [
+        {
+          name: "icon",
+          value: "fab-github",
+        },
+        {
+          name: "prefix",
+          value: "https://www.github.com/search?q=",
+        },
+        {
+          name: "excludeFromCategories",
+          value: "7",
+        },
+      ],
+    },
   ];
   needs.hooks.beforeEach(() => {
     settings.extra_search_icons = JSON.stringify(itemsJSON);
@@ -62,24 +96,22 @@ acceptance("Header Search - Extra Icons", function (needs) {
     await click(".floating-search-input #search-term");
     await fillIn(".floating-search-input #search-term", "test");
 
-    assert.ok(
-      visible(".floating-search-input .extra-search-icons"),
-      "it has extra icons"
-    );
+    assert.ok(visible(".extra-search-icons"), "it has extra icons");
 
     assert.ok(
-      visible(
-        ".floating-search-input .extra-search-icons .search-extra-icon-google"
-      ),
+      visible(".extra-search-icons .search-extra-icon-google"),
       "it has the google search icon (as defined in theme settings)"
     );
 
     assert.strictEqual(
-      query(
-        ".floating-search-input .extra-search-icons .search-extra-icon-google"
-      ).href,
+      query(".extra-search-icons .search-extra-icon-google").href,
       "https://www.google.com/search?q=test",
       "it appends current search term to external link"
+    );
+
+    assert.ok(
+      visible(".extra-search-icons .search-extra-icon-github"),
+      "it respects the excludeFromCategories parameter"
     );
 
     assert.ok(
@@ -90,6 +122,21 @@ acceptance("Header Search - Extra Icons", function (needs) {
     assert.notOk(
       visible(".floating-search-input .clear-search"),
       "it no longer shows the clear search button"
+    );
+
+    await visit("/c/dev/7");
+
+    await click(".floating-search-input #search-term");
+
+    assert.strictEqual(
+      query(".extra-search-icons .search-extra-icon-apple").href,
+      "https://www.apple.com/search?q=test",
+      "it shows the apple icon in category #7 via showInCategories parameter"
+    );
+
+    assert.notOk(
+      visible(".extra-search-icons .search-extra-icon-github"),
+      "it respects the excludeFromCategories parameter"
     );
   });
 });
