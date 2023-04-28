@@ -103,6 +103,7 @@ a.widget-link.search-link {
 .search-bar-icons--icon {
   .d-icon {
     color: var(--primary-low-mid);
+    pointer-events: none;
   }
 
   &:hover .d-icon {

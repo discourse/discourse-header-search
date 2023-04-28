@@ -110,6 +110,16 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
       : false;
   },
 
+  mouseDown(e) {
+    // A hacky fix for an issue with core widget event hooks
+    // the `mouseDown` event hook triggers a rerender in core, which
+    // ends up stopping event propagation and preventing the `click` event
+    // for these links
+    if (e.target?.classList?.contains("search-bar-icons--icon")) {
+      e.target.click();
+    }
+  },
+
   linkClickedEvent(attrs) {
     const { searchLogId, searchResultId, searchResultType } = attrs;
     if (searchLogId && searchResultId && searchResultType) {
