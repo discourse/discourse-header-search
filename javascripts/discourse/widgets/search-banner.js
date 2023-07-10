@@ -4,7 +4,10 @@ import {
   default as searchMenu,
 } from "discourse/widgets/search-menu";
 import { h } from "virtual-dom";
+import { iconNode } from "discourse-common/lib/icon-library";
 import { logSearchLinkClick } from "discourse/lib/search";
+import RenderGlimmer from "discourse/widgets/render-glimmer";
+import { hbs } from "ember-cli-htmlbars";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
   tagName: "div.floating-search-input",
@@ -42,6 +45,37 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     } = this.searchData;
     const showResults = this.state.expanded;
 
+    let extraIcons = this.attach("link", {
+      title: "search.clear_search",
+      action: "clearSearch",
+      className: "clear-search",
+      contents: () => iconNode("times"),
+    });
+
+    if (JSON.parse(settings.extra_search_icons).length > 0) {
+      extraIcons = new RenderGlimmer(
+        this,
+        "span.extra-search-icons",
+        hbs`<SearchBarIcons @term={{@data.term}}/>`,
+        { term }
+      );
+
+      // a bit of a hammer, but this ensures
+      // icons are updated when switching routes
+      this.appEvents.on("page:changed", () => {
+        this.scheduleRerender();
+      });
+    }
+
+    const advancedSearchButton = loading
+      ? h("div.spinner-holder", h("div.spinner"))
+      : this.attach("link", {
+          href: this.fullSearchUrl({ expanded: true }),
+          contents: () => iconNode("sliders-h"),
+          className: "show-advanced-search",
+          title: "search.open_advanced",
+        });
+
     return [
       h(
         "div.search-banner",
@@ -53,10 +87,12 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
                 icon: "search",
                 action: term ? "fullSearch" : "",
               }),
-              loading ? h("div.searching", h("div.spinner")) : "",
               this.attach("search-term", {
                 value: term,
               }),
+              term
+                ? h("div.searching", [extraIcons, advancedSearchButton])
+                : h("div.searching", advancedSearchButton),
             ]),
             showResults
               ? this.attach("search-menu-results", {
