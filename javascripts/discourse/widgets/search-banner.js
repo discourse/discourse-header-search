@@ -19,6 +19,19 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     };
   },
 
+  init() {
+    // used to show/hide default search button
+    document
+      .querySelector(".d-header")
+      ?.classList.add("search-header--visible");
+  },
+
+  destroy() {
+    document
+      .querySelector(".d-header")
+      ?.classList.remove("search-header--visible");
+  },
+
   html() {
     // SearchData is passed down from the search-menu widget
     const {
@@ -99,6 +112,8 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
   },
 
   mouseDownOutside() {
+    this.state.inTopicContext = false; // need to clear context, otherwise you can't search all topics and posts again
+
     return this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
@@ -108,6 +123,10 @@ export default createWidgetFrom(searchMenu, "floating-search-input", {
     return !this.state.expanded
       ? this.sendWidgetAction("toggleSearchBanner")
       : false;
+  },
+
+  setTopicContext() {
+    this.state.inTopicContext = true;
   },
 
   linkClickedEvent(attrs) {
