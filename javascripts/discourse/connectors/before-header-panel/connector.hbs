@@ -6,6 +6,8 @@
       (not this.site.siteSettings.login_required)
     )
   }}
+    {{! @attrs.topic does not work here }}
+    {{! template-lint-disable no-args-paths }}
     {{#unless this.args.attrs.topic}}
       <MountWidget @widget="search-banner" />
     {{/unless}}
