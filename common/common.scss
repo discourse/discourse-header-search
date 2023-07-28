@@ -70,6 +70,8 @@ a.widget-link.search-link {
           &:empty {
             display: none;
           }
+          max-height: 80vh;
+          overflow-y: auto;
           box-sizing: border-box;
           background: var(--secondary);
           border: 1px solid var(--primary-low);
@@ -97,7 +99,7 @@ a.widget-link.search-link {
   }
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 500px) {
     .floating-search-input {
         margin-right: 40px;
     }
