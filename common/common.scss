@@ -24,6 +24,11 @@ a.widget-link.search-link {
   margin-left: 0;
 }
 
+.floating-search-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .floating-search-input {
   width: 50%;
   margin: 0 auto;
