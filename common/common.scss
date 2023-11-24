@@ -51,10 +51,13 @@ a.widget-link.search-link {
         margin: 0 auto;
         position: relative;
 
-        .searching .spinner-holder {
-          display: inline-block;
-          vertical-align: top;
-          margin-left: 4px;
+        .searching {
+          padding-right: 0.5rem;
+          .spinner-holder {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 4px;
+          }
         }
 
         .widget-button.btn {
@@ -81,7 +84,6 @@ a.widget-link.search-link {
             border-radius: var(--d-input-border-radius);
             &:focus {
               outline: none;
-              box-shadow: 0px 0px 0px 2px rgba(var(--tertiary-rgb), 0.25);
             }
           }
         }
@@ -91,7 +93,6 @@ a.widget-link.search-link {
           }
           background: var(--secondary);
           border: 1px solid var(--primary-low);
-          margin-top: 0.5em;
           padding: 0.5em;
           position: absolute;
           box-shadow: var(--shadow-header);
