@@ -1,13 +1,13 @@
-import { createWidgetFrom } from "discourse/widgets/widget";
-import {
-  DEFAULT_TYPE_FILTER,
-  default as searchMenu,
-} from "discourse/widgets/search-menu";
+import { hbs } from "ember-cli-htmlbars";
 import { h } from "virtual-dom";
-import { iconNode } from "discourse-common/lib/icon-library";
 import { logSearchLinkClick } from "discourse/lib/search";
 import RenderGlimmer from "discourse/widgets/render-glimmer";
-import { hbs } from "ember-cli-htmlbars";
+import {
+  default as searchMenu,
+  DEFAULT_TYPE_FILTER,
+} from "discourse/widgets/search-menu";
+import { createWidgetFrom } from "discourse/widgets/widget";
+import { iconNode } from "discourse-common/lib/icon-library";
 
 export default createWidgetFrom(searchMenu, "floating-search-input", {
   tagName: "div.floating-search-input",
