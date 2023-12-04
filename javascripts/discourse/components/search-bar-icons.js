@@ -5,6 +5,7 @@ import { getOwner } from "discourse-common/lib/get-owner";
 
 export default class SearchBarIcons extends Component {
   @service router;
+  @service search;
   @tracked items = [];
 
   constructor() {
@@ -20,7 +21,7 @@ export default class SearchBarIcons extends Component {
       categoryId = topic?.model?.category_id;
     }
 
-    if (this.args.term !== "") {
+    if (this.search.activeGlobalSearchTerm !== "") {
       JSON.parse(settings.extra_search_icons).forEach((item) => {
         if (item.params) {
           item.params.forEach((p) => {
@@ -28,7 +29,7 @@ export default class SearchBarIcons extends Component {
           });
 
           if (item.prefix) {
-            item.url = `${item.prefix}${this.args.term}`;
+            item.url = `${item.prefix}${this.search.activeGlobalSearchTerm}`;
           }
 
           delete item.params;
