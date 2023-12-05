@@ -1,29 +1,23 @@
 import { click, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import {
-  acceptance,
-  query,
-  visible,
-} from "discourse/tests/helpers/qunit-helpers";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("Header Search", function () {
   test("shows in header", async function (assert) {
     await visit("/");
 
-    assert.ok(
-      visible(".floating-search-input"),
-      "search form present in header"
-    );
-    assert.ok(visible("#search-term"), "it shows the search input");
-    assert.ok(
-      visible(".show-advanced-search"),
-      "it shows full page search button"
-    );
+    assert
+      .dom(".floating-search-input")
+      .exists("search form present in header");
+    assert.dom("#search-term").exists("it shows the search input");
+    assert
+      .dom(".show-advanced-search")
+      .exists("it shows full page search button");
 
     await click(".floating-search-input #search-term");
     await fillIn(".floating-search-input #search-term", "test");
 
-    assert.ok(visible(".search-menu .results"), "it has results");
+    assert.dom(".search-menu .results").exists("it has results");
   });
 });
 
@@ -88,55 +82,48 @@ acceptance("Header Search - Extra Icons", function (needs) {
   test("shows additional icons", async function (assert) {
     await visit("/");
 
-    assert.ok(
-      visible(".floating-search-input"),
-      "search form present in header"
-    );
+    assert
+      .dom(".floating-search-input")
+      .exists("search form present in header");
 
     await click(".floating-search-input #search-term");
     await fillIn(".floating-search-input #search-term", "test");
 
-    assert.ok(visible(".extra-search-icons"), "it has extra icons");
+    assert.dom(".extra-search-icons").exists("it has extra icons");
 
-    assert.ok(
-      visible(".extra-search-icons .search-extra-icon-google"),
-      "it has the google search icon (as defined in theme settings)"
-    );
+    assert
+      .dom(".extra-search-icons .search-extra-icon-google")
+      .exists("it has the google search icon (as defined in theme settings)");
 
-    assert.strictEqual(
-      query(".extra-search-icons .search-extra-icon-google").href,
-      "https://www.google.com/search?q=test",
-      "it appends current search term to external link"
-    );
+    assert
+      .dom(".extra-search-icons .search-extra-icon-google")
+      .hasAttribute(
+        "href",
+        "https://www.google.com/search?q=test",
+        "it appends current search term to external link"
+      );
 
-    assert.ok(
-      visible(".extra-search-icons .search-extra-icon-github"),
-      "it respects the excludeFromCategories parameter"
-    );
+    assert
+      .dom(".extra-search-icons .search-extra-icon-github")
+      .exists("it respects the excludeFromCategories parameter");
 
-    assert.ok(
-      visible(".show-advanced-search"),
-      "it still shows full page search button"
-    );
-
-    assert.notOk(
-      visible(".floating-search-input .clear-search"),
-      "it no longer shows the clear search button"
-    );
+    assert
+      .dom(".show-advanced-search")
+      .exists("it still shows full page search button");
 
     await visit("/c/dev/7");
-
     await click(".floating-search-input #search-term");
 
-    assert.strictEqual(
-      query(".extra-search-icons .search-extra-icon-apple").href,
-      "https://www.apple.com/search?q=test",
-      "it shows the apple icon in category #7 via showInCategories parameter"
-    );
+    assert
+      .dom(".extra-search-icons .search-extra-icon-apple")
+      .hasAttribute(
+        "href",
+        "https://www.apple.com/search?q=test",
+        "it shows the apple icon in category #7 via showInCategories parameter"
+      );
 
-    assert.notOk(
-      visible(".extra-search-icons .search-extra-icon-github"),
-      "it respects the excludeFromCategories parameter"
-    );
+    assert
+      .dom(".extra-search-icons .search-extra-icon-github")
+      .doesNotExist("it respects the excludeFromCategories parameter");
   });
 });

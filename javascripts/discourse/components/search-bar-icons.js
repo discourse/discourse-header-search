@@ -6,12 +6,9 @@ import { getOwner } from "discourse-common/lib/get-owner";
 export default class SearchBarIcons extends Component {
   @service router;
   @service search;
-  @tracked items = [];
 
-  constructor() {
-    super(...arguments);
-
-    const itemsArray = [];
+  get searchIconItems() {
+    const searchIcons = [];
     const currentRoute = this.router.currentRoute;
     let categoryId = currentRoute.attributes?.category?.id;
 
@@ -55,13 +52,13 @@ export default class SearchBarIcons extends Component {
               showInCategories.length === 0 ||
               showInCategories.includes(categoryId)
             ) {
-              itemsArray.push(item);
+              searchIcons.push(item);
             }
             break;
         }
       });
 
-      this.items = itemsArray;
+      return searchIcons;
     }
   }
 }

@@ -60,6 +60,10 @@ a.search-link {
           padding-left: 0.5em;
         }
 
+        .searching .extra-search-icons ~ .clear-search {
+          display: none;
+        }
+
         .searching {
           display: flex;
           padding-right: 0.5rem;
