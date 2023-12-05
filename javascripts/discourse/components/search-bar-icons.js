@@ -1,16 +1,13 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
 import { getOwner } from "discourse-common/lib/get-owner";
 
 export default class SearchBarIcons extends Component {
   @service router;
-  @tracked items = [];
+  @service search;
 
-  constructor() {
-    super(...arguments);
-
-    const itemsArray = [];
+  get searchIconItems() {
+    const searchIcons = [];
     const currentRoute = this.router.currentRoute;
     let categoryId = currentRoute.attributes?.category?.id;
 
@@ -20,7 +17,7 @@ export default class SearchBarIcons extends Component {
       categoryId = topic?.model?.category_id;
     }
 
-    if (this.args.term !== "") {
+    if (this.search.activeGlobalSearchTerm !== "") {
       JSON.parse(settings.extra_search_icons).forEach((item) => {
         if (item.params) {
           item.params.forEach((p) => {
@@ -28,7 +25,7 @@ export default class SearchBarIcons extends Component {
           });
 
           if (item.prefix) {
-            item.url = `${item.prefix}${this.args.term}`;
+            item.url = `${item.prefix}${this.search.activeGlobalSearchTerm}`;
           }
 
           delete item.params;
@@ -54,13 +51,13 @@ export default class SearchBarIcons extends Component {
               showInCategories.length === 0 ||
               showInCategories.includes(categoryId)
             ) {
-              itemsArray.push(item);
+              searchIcons.push(item);
             }
             break;
         }
       });
 
-      this.items = itemsArray;
+      return searchIcons;
     }
   }
 }

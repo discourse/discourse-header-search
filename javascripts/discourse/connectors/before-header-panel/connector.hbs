@@ -7,10 +7,17 @@
     )
   }}
     {{#unless @outletArgs.attrs.topic}}
-      <MountWidget
-        @widget="search-banner"
-        @class="floating-search-input-wrapper"
-      />
+      <div class="floating-search-input-wrapper">
+        <div class="floating-search-input">
+          <div class="search-banner">
+            <div class="search-banner-inner wrap">
+              <div class="search-menu">
+                <SearchMenu />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     {{/unless}}
   {{/if}}
 {{/unless}}
