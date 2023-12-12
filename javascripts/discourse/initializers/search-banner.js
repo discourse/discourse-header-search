@@ -4,7 +4,7 @@ export default {
   name: "search-banner",
 
   initialize() {
-    withPluginApi("1.17.0", (api) => {
+    withPluginApi("1.1.0", (api) => {
       api.reopenWidget("header", {
         didRenderWidget() {
           document
