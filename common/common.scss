@@ -77,8 +77,6 @@ a.search-link {
         .search-icon {
           background: transparent;
           padding: 0.25em;
-          position: absolute;
-          top: 0.25em;
           left: 0.25em;
           pointer-events: none;
           color: var(--header_primary-medium);
@@ -97,7 +95,7 @@ a.search-link {
             height: 100%;
             width: 100%;
             margin: 0;
-            padding: 0.5em 0.5em 0.5em 2em;
+            padding: 0.5em;
             border-radius: var(--d-input-border-radius);
             &:focus {
               outline: none;
