@@ -6,15 +6,20 @@ export default {
   initialize() {
     withPluginApi("1.1.0", (api) => {
       const site = api.container.lookup("service:site");
-      api.reopenWidget("header", {
-        didRenderWidget() {
-          if (!site.isMobileDevice) {
-            document
-              .querySelector(".d-header")
-              .classList.add("search-header--visible");
-          }
-        },
-      });
+      const currentUser = api.getCurrentUser();
+      if (currentUser?.glimmer_header_enabled) {
+        api.addCustomHeaderClass("search-header--visible");
+      } else {
+        api.reopenWidget("header", {
+          didRenderWidget() {
+            if (!site.isMobileDevice) {
+              document
+                .querySelector(".d-header")
+                .classList.add("search-header--visible");
+            }
+          },
+        });
+      }
     });
   },
 };
