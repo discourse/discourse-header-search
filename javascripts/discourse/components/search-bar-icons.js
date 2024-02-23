@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { inject as service } from "@ember/service";
-import { getOwner } from "discourse-common/lib/get-owner";
+import { getOwner } from "@ember/application"
 
 export default class SearchBarIcons extends Component {
   @service router;
