@@ -77,9 +77,9 @@ a.search-link {
         .search-icon {
           background: transparent;
           padding: 0.25em;
-          left: 0.25em;
           pointer-events: none;
           color: var(--header_primary-medium);
+          margin-left: 0.3em;
         }
 
         .search-menu-panel {

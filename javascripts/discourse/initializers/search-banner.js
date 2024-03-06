@@ -6,15 +6,9 @@ export default {
   initialize() {
     withPluginApi("1.1.0", (api) => {
       const site = api.container.lookup("service:site");
-      api.reopenWidget("header", {
-        didRenderWidget() {
-          if (!site.isMobileDevice) {
-            document
-              .querySelector(".d-header")
-              .classList.add("search-header--visible");
-          }
-        },
-      });
+      if (!site.isMobileDevice) {
+        document.querySelector("body").classList.add("search-header--visible");
+      }
     });
   },
 };
