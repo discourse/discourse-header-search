@@ -80,6 +80,9 @@ a.search-link {
           pointer-events: none;
           color: var(--header_primary-medium);
           margin-left: 0.3em;
+          height: 100%;
+          position: absolute;
+          z-index: 2;
         }
 
         .search-menu-panel {
@@ -88,7 +91,7 @@ a.search-link {
 
         .search-input {
           display: flex;
-          padding: 0;
+          padding: 0 0 0 1.5em;
           border-radius: var(--d-input-border-radius);
 
           #search-term {
