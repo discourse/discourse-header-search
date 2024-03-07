@@ -1,0 +1,19 @@
+
+{{!
+  @outletArgs.attrs.topic is the legacy version. Can be removed once core v3.2.0.beta4 is released
+  and this Theme's compatibility file is updated
+}}
+{{#unless (or @outletArgs.topic @outletArgs.attrs.topic)}}
+  <div class="floating-search-input-wrapper">
+    <div class="floating-search-input">
+      <div class="search-banner">
+        <div class="search-banner-inner wrap">
+          <div class="search-menu">
+            <SearchIcon />
+            <SearchMenu />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/unless}}
