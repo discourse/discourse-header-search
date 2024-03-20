@@ -16,10 +16,6 @@ export default class HeaderSearch extends Component {
   get shouldDisplay() {
     const titleDocked = this.args.outletArgs?.topic;
 
-    return (
-      this.displayForUser &&
-      !this.site.mobileView &&
-      !titleDocked
-    );
+    return this.displayForUser && !this.site.mobileView && !titleDocked;
   }
 }
