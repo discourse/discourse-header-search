@@ -3,7 +3,6 @@ import { inject as service } from "@ember/service";
 
 export default class HeaderSearch extends Component {
   @service site;
-  @service router;
   @service siteSettings;
   @service currentUser;
 
@@ -15,10 +14,12 @@ export default class HeaderSearch extends Component {
   }
 
   get shouldDisplay() {
+    const titleDocked = this.args.outletArgs?.topic;
+
     return (
       this.displayForUser &&
       !this.site.mobileView &&
-      !this.router.currentRoute.name.includes("topic")
+      !titleDocked
     );
   }
 }
