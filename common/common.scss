@@ -67,6 +67,11 @@ a.search-link {
         .searching {
           display: flex;
           padding-right: 0.5rem;
+          .show-advanced-search,
+          a.clear-search {
+            display: inline-flex;
+            align-items: center;
+          }
           .spinner-holder {
             display: inline-block;
             vertical-align: top;
