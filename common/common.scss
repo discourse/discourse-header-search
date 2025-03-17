@@ -11,9 +11,11 @@
 
 a.search-link {
   color: var(--tertiary);
+
   .d-icon {
     color: var(--primary-medium);
   }
+
   .search-item-slug,
   .keyword {
     color: var(--primary);
@@ -32,8 +34,10 @@ a.search-link {
 .floating-search-input {
   width: 50%;
   margin: 0 auto;
+
   .search-banner {
     height: 100%;
+
     &-inner.wrap {
       height: 100%;
       width: 100%;
@@ -42,14 +46,16 @@ a.search-link {
       .search-menu {
         height: 100%;
         width: 100%;
+        margin: 0 auto;
+        position: relative;
+
         @media screen and (max-width: 1025px) {
           width: 80%;
         }
+
         @media screen and (max-width: 768px) {
           width: 95%;
         }
-        margin: 0 auto;
-        position: relative;
 
         // Hide search-icon when search-context is present
         .search-input .search-context ~ .search-icon {
@@ -67,11 +73,13 @@ a.search-link {
         .searching {
           display: flex;
           padding-right: 0.5rem;
+
           .show-advanced-search,
           a.clear-search {
             display: inline-flex;
             align-items: center;
           }
+
           .spinner-holder {
             display: inline-block;
             vertical-align: top;
@@ -105,15 +113,14 @@ a.search-link {
             margin: 0;
             padding: 0.5em;
             border-radius: var(--d-input-border-radius);
+
             &:focus {
               outline: none;
             }
           }
         }
+
         .results {
-          &:empty {
-            display: none;
-          }
           background: var(--secondary);
           border: 1px solid var(--primary-low);
           padding: 0.5em;
@@ -121,6 +128,11 @@ a.search-link {
           box-shadow: var(--shadow-header);
           box-sizing: border-box;
           width: 100%;
+
+          &:empty {
+            display: none;
+          }
+
           ul.list,
           ul {
             list-style: none;
