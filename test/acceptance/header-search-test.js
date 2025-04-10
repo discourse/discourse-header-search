@@ -9,13 +9,13 @@ acceptance("Header Search", function () {
     assert
       .dom(".floating-search-input")
       .exists("search form present in header");
-    assert.dom("#search-term").exists("it shows the search input");
+    assert.dom(".search-term__input").exists("it shows the search input");
     assert
       .dom(".show-advanced-search")
       .exists("it shows full page search button");
 
-    await click(".floating-search-input #search-term");
-    await fillIn(".floating-search-input #search-term", "test");
+    await click(".floating-search-input .search-term__input");
+    await fillIn(".floating-search-input .search-term__input", "test");
 
     assert.dom(".search-menu .results").exists("it has results");
   });
@@ -86,8 +86,8 @@ acceptance("Header Search - Extra Icons", function (needs) {
       .dom(".floating-search-input")
       .exists("search form present in header");
 
-    await click(".floating-search-input #search-term");
-    await fillIn(".floating-search-input #search-term", "test");
+    await click(".floating-search-input .search-term__input");
+    await fillIn(".floating-search-input .search-term__input", "test");
 
     assert.dom(".extra-search-icons").exists("it has extra icons");
 
@@ -112,7 +112,7 @@ acceptance("Header Search - Extra Icons", function (needs) {
       .exists("it still shows full page search button");
 
     await visit("/c/dev/7");
-    await click(".floating-search-input #search-term");
+    await click(".floating-search-input .search-term__input");
 
     assert
       .dom(".extra-search-icons .search-extra-icon-apple")
