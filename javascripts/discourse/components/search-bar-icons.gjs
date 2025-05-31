@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { getOwner } from "@ember/application";
 import { service } from "@ember/service";
+import SearchBarIcon from "./search-bar-icon";
 
 export default class SearchBarIcons extends Component {
   @service router;
@@ -60,4 +61,14 @@ export default class SearchBarIcons extends Component {
       return searchIcons;
     }
   }
+
+  <template>
+    {{#if this.searchIconItems}}
+      <span class="extra-search-icons">
+        {{#each this.searchIconItems as |item|}}
+          <SearchBarIcon @item={{item}} />
+        {{/each}}
+      </span>
+    {{/if}}
+  </template>
 }

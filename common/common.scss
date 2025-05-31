@@ -49,11 +49,11 @@ a.search-link {
         margin: 0 auto;
         position: relative;
 
-        @media screen and (max-width: 1025px) {
+        @media screen and (width <= 1025px) {
           width: 80%;
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (width <= 768px) {
           width: 95%;
         }
 
