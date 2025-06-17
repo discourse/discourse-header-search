@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { modifier as modifierFn } from "ember-modifier";
-import SearchMenu, { focusSearchInput } from "discourse/components/search-menu";
+import SearchMenu from "discourse/components/search-menu";
 import bodyClass from "discourse/helpers/body-class";
 import SearchIcon from "./search-icon";
 
@@ -10,9 +10,10 @@ export default class HeaderSearch extends Component {
   @service siteSettings;
   @service currentUser;
   @service appEvents;
+  @service search;
 
   handleKeyboardShortcut = modifierFn(() => {
-    const cb = () => focusSearchInput();
+    const cb = () => this.search.focusSearchInput();
     this.appEvents.on("header:keyboard-trigger", cb);
     return () => this.appEvents.off("header:keyboard-trigger", cb);
   });
