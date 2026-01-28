@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "header search keyboard shortcut", type: :system do
+RSpec.describe "header search keyboard shortcut" do
   before { upload_theme_component }
 
   it "focuses search header when keyboard shortcut used" do
