@@ -21,6 +21,38 @@ acceptance("Header Search", function () {
   });
 });
 
+acceptance("Header Search - Mobile", function (needs) {
+  needs.mobileView();
+
+  test("is hidden on mobile by default", async function (assert) {
+    await visit("/");
+
+    assert
+      .dom(".floating-search-input")
+      .doesNotExist("search form is not present in header");
+  });
+});
+
+acceptance("Header Search - Mobile with always_show", function (needs) {
+  needs.mobileView();
+
+  needs.hooks.beforeEach(() => {
+    settings.always_show = true;
+  });
+
+  needs.hooks.afterEach(() => {
+    settings.always_show = false;
+  });
+
+  test("is shown on mobile when always_show is enabled", async function (assert) {
+    await visit("/");
+
+    assert
+      .dom(".floating-search-input")
+      .exists("search form present in header");
+  });
+});
+
 acceptance("Header Search - Extra Icons", function (needs) {
   const itemsJSON = [
     {
