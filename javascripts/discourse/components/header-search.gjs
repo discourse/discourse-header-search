@@ -26,11 +26,15 @@ export default class HeaderSearch extends Component {
   }
 
   get shouldDisplay() {
-    return (
-      this.displayForUser &&
-      !this.site.mobileView &&
-      !this.args.outletArgs?.topicInfoVisible
-    );
+    if (!this.displayForUser) {
+      return false;
+    }
+
+    if (settings.always_show) {
+      return true;
+    }
+
+    return !this.site.mobileView && !this.args.outletArgs?.topicInfoVisible;
   }
 
   <template>

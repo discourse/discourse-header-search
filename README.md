@@ -4,6 +4,10 @@ This component removes the search icon from the header menu and creates a search
 
 ![docs card filter preview](./readme-assets/example.png)
 
+### Always show the search bar
+
+By default, the search bar is hidden on mobile and in topics once the topic title docks into the header. Enable the `always_show` setting to keep the search bar visible in those cases too.
+
 ### Optionally show external search icons
 
 Use the `extra_search_icons` to show additional icons in the search bar.

@@ -1,3 +1,7 @@
+always_show:
+  type: bool
+  default: false
+  description: "Always show the search bar in the header, including on mobile and in topics after the topic title docks into the header."
 extra_search_icons:
   description: "Add extra icons to the search bar (for example to trigger an external search). See repository README for available params."
   default: >-
